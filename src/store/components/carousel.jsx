@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFeaturedCarousel } from '../slices/carouselSlice.js';
+import { fetchFeatured } from '../../api/axios.js';
 
 export const MovieCarousel = () => {
     const dispatch = useDispatch();
@@ -14,14 +14,14 @@ export const MovieCarousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
-        dispatch(fetchFeaturedCarousel());
+        dispatch(fetchFeatured());
     }, [dispatch]);
 
     useEffect(() => {
         if (movies.length === 0) {
             return;
         }
-        { /* carousel interval */ }
+        // carousel interval
         const interval = setInterval(() => {
             setCurrentIndex((current) => {
                 return (current + 1) % movies.length;
@@ -94,12 +94,12 @@ export const MovieCarousel = () => {
                     </div>
 
                     {/* title */}
-                    <div className="gap-[18px]">
+                    <div>
                         <h1 className="mb-4 text-4xl font-black uppercase leading-none tracking-tight md:text-5xl">
                             {movie.title}
                         </h1>
 
-                        <div className="gap-[8px]">
+                        <div>
                             {/* movie information */}
                             <div className="mb-4 flex items-center gap-2 text-xs font-semibold">
                                 <span className="rounded-full bg-[#EC3013]/10 text-[#EC3013] px-[12px] py-[6px]">
@@ -162,7 +162,7 @@ export const MovieCarousel = () => {
                         onClick={goPrevious}
                     >
                         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21.2499 8.5C21.2499 8.5 12.75 14.7602 12.75 17.0001C12.75 19.24 21.25 25.5 21.25 25.5" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+                        <path d="M21.2499 8.5C21.2499 8.5 12.75 14.7602 12.75 17.0001C12.75 19.24 21.25 25.5 21.25 25.5" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" stroke="white"/>
                         </svg>
                     </button>
 
@@ -172,7 +172,7 @@ export const MovieCarousel = () => {
                         onClick={goNext}
                     >
                         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.7501 8.5C12.7501 8.5 21.25 14.7602 21.25 17.0001C21.25 19.24 12.75 25.5 12.75 25.5" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+                        <path d="M12.7501 8.5C12.7501 8.5 21.25 14.7602 21.25 17.0001C21.25 19.24 12.75 25.5 12.75 25.5" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" stroke="white"/>
                         </svg>
                     </button>
                 </div>
