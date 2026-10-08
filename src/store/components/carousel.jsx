@@ -18,9 +18,6 @@ export const MovieCarousel = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (movies.length === 0) {
-            return;
-        }
         // carousel interval
         const interval = setInterval(() => {
             setCurrentIndex((current) => {

@@ -3,7 +3,7 @@
 export const Footer = () => {
     return (
         <div className="h-[100px] w-full flex flex-col px-[40px] justify-evenly">
-            <div className="h-[3px] w-full bg-white/10"></div>
+            <div className="h-[2px] w-full bg-white/10"></div>
             <div className="flex justify-between">
                 <h1 className=" flex gap-[6px]">
                     <span className="text-[20px] font-bold">KINO</span>
