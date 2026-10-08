@@ -11,7 +11,7 @@ export default function ComingSoon() {
     }, [dispatch]);
 
     return (
-        <section className="min-h-[175px] w-full px-32">
+        <section className="h-[200px] w-full px-32">
             <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-lg font-extrabold uppercase">Coming Soon...</h2>
                 <a href="/movies" className="text-xs text-[#f5320f] hover:underline">
@@ -29,7 +29,7 @@ export default function ComingSoon() {
                     {items.map((movie) => (
                         <div
                             key={movie.id}
-                            className="flex w-[470px]  shrink-0 gap-3 rounded-2xl bg-[#1a1c2e] p-2.5"
+                            className="flex w-[470px] h-[145px] shrink-0 gap-3 rounded-2xl bg-[#1a1c2e] p-2.5 cursor-pointer  hover:border-[1px] hover:border-white/10"
                         >
                             <img
                                 src={movie.posterUrl || movie.poster}
