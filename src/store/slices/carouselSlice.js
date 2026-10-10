@@ -1,4 +1,4 @@
-import {fetchFeatured}  from "../../api/axios.js"
+import {fetchFeatured}  from "../../api/moviesApi.js"
 import {createSlice} from "@reduxjs/toolkit";
 
 

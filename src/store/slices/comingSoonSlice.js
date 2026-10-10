@@ -1,4 +1,4 @@
-import {fetchComingSoon} from "../../api/axios";
+import {fetchComingSoon} from "../../api/moviesApi.js";
 import {createSlice} from "@reduxjs/toolkit";
 
 const comingSoonSlice = createSlice({

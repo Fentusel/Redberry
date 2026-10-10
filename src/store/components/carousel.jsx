@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFeatured } from '../../api/axios.js';
+import { fetchFeatured } from '../../api/moviesApi.js';
 
 export const MovieCarousel = () => {
     const dispatch = useDispatch();

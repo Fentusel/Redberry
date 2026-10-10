@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchComingSoon } from "../../api/axios.js";
+import { fetchComingSoon } from "../../api/moviesApi.js";
 
 export default function ComingSoon() {
     const dispatch = useDispatch();

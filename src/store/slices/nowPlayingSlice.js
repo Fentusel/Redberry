@@ -1,4 +1,4 @@
-import {fetchNowPlaying}  from "../../api/axios.js"
+import {fetchNowPlaying}  from "../../api/moviesApi.js"
 import {createSlice} from "@reduxjs/toolkit";
 
 const nowPlayingSlice = createSlice ( {

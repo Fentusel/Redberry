@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNowPlaying } from "../../api/axios.js";
+import { fetchNowPlaying } from "../../api/moviesApi.js";
+import { Link } from "react-router-dom";
 
 export default function NowPlaying() {
     const dispatch = useDispatch();
@@ -14,9 +15,9 @@ export default function NowPlaying() {
         <section className="min-h-[525px] w-full pt-[32px] px-32">
             <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-lg font-bold uppercase">Now Playing</h2>
-                <a href="/movies" className="text-xs text-[#f5320f] hover:underline">
+                <Link to="/sessions" className="text-xs text-[#f5320f] hover:underline">
                     See all
-                </a>
+                </Link>
             </div>
             {loading && <p className="text-sm text-gray-400">Loading...</p>}
             {error && (
