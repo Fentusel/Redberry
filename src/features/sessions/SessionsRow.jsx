@@ -7,7 +7,7 @@ export default function SessionsRow({ movie, sessions }) {
                 <img
                     src={movie.posterUrl}
                     alt={movie.title}
-                    className="h-[52px] w-9 rounded object-cover"
+                    className="h-[80px] w-[60px] rounded object-cover"
                 />
                 <div>
                     <div className="flex items-center gap-2">

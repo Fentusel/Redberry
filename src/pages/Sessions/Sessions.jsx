@@ -21,10 +21,10 @@ export const Sessions = () => {
 
     return (
         <div className="flex min-h-screen w-full flex-col bg-[#070C1C] text-white">
-            <main className="flex-1 px-6 py-6">
+            <main className="flex-1 px-10 py-6">
                 <h1 className="text-xl font-bold">Sessions</h1>
                 <p className="mb-6 text-xs text-white/60">Browse showtimes across all venues</p>
-                <div className="flex gap-8">
+                <div className="flex gap-10">
                     <Filter options={options} filters={filters} />
                     <div className="min-w-0 flex-1">
                         <div className="mb-5 flex items-center justify-between text-xs">

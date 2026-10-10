@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { KEYS } from './hooks'
 
-const DAYS_TO_SHOW = 14
+const DAYS_TO_SHOW = 7
 const SHORT_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 function formatDateISO(date) {
@@ -34,8 +34,17 @@ function CheckboxRow({ checked, onChange, label, hint }) {
             <input
                 type="checkbox"
                 checked={checked}
+                className="h-4 w-4 cursor-pointer appearance-none rounded-[5px] border border-white/30 bg-transparent
+                checked:border-[#f5320f]
+                checked:bg-[#f5320f]
+                checked:after:text-white
+                checked:after:content-['✓']
+                checked:after:flex
+                checked:after:items-center
+                checked:after:justify-center
+                checked:after:text-[11px]
+                checked:after:font-bold"
                 onChange={onChange}
-                className="h-3.5 w-3.5 cursor-pointer rounded border-white/30 bg-transparent accent-[#f5320f]"
             />
             <span className="font-medium">{label}</span>
             {hint && <span className="text-[10px] text-white/50">· {hint}</span>}
@@ -80,7 +89,7 @@ export default function Filter({ options, filters }) {
     }, [options?.venues, options?.formats, selectedVenueSlugs])
 
     return (
-        <aside className="sticky top-6 w-[230px] shrink-0 self-start rounded-2xl bg-[#1a1c2e] p-5">
+        <aside className="sticky top-6 w-[350px] shrink-0 self-start rounded-2xl bg-[#1a1c2e] p-5 ">
             <h2 className="mb-2 text-sm font-bold">Filters</h2>
             <SectionGroup title="Venue">
                 {options?.venues?.map((venue) => (
@@ -94,7 +103,8 @@ export default function Filter({ options, filters }) {
                 ))}
             </SectionGroup>
             <SectionGroup title="Date">
-                <div className="flex gap-1.5 overflow-x-auto pb-1">
+                <div className="flex gap-2 overflow-x-auto pb-2
+                    [&::-webkit-scrollbar]:appearance-none">
                     {days.map((item) => {
                         const isActive = item.value === selectedDate
                         return (
@@ -149,17 +159,18 @@ export default function Filter({ options, filters }) {
                     )
                 })}
             </SectionGroup>
-            <div className="pt-4 text-center text-[10px] text-white/50">
-                {activeCount} filters active
+            <div className="flex flex-col pt-4 text-center text-[10px] text-white/50 gap-5">
                 {activeCount > 0 && (
                     <button
                         type="button"
                         onClick={clearAll}
-                        className="ml-2 text-[#f5320f] hover:underline"
+                        className="text-center w-full border-[1px] border-gray-400 rounded-3xl p-2 text-white
+                        hover:bg-white/10 transition"
                     >
                         Clear
                     </button>
                 )}
+                {activeCount} filters active
             </div>
         </aside>
     )

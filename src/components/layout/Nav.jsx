@@ -16,7 +16,7 @@ export default function NavBar({ page, lastPage, onChange }) {
     if (!lastPage || lastPage <= 1) return null
 
     return (
-        <nav className="flex items-center justify-center gap-2 py-8" aria-label="NavBar">
+        <nav className="flex items-center justify-center gap-2 py-8 over" aria-label="NavBar">
             <button
                 onClick={() => onChange(page - 1)}
                 disabled={page === 1}
