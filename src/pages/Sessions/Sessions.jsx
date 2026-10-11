@@ -29,7 +29,7 @@ export const Sessions = () => {
                     <div className="min-w-0 flex-1">
                         <div className="mb-5 flex items-center justify-between text-xs">
                             <span className="text-white/70">
-                                Showing {meta?.totalSessions ?? 0} sessions
+                                Showing {data?.length ?? 0} sessions
                             </span>
                             <label className="flex items-center gap-2 text-white/60">
                                 Sort:

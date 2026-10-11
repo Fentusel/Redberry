@@ -1,9 +1,12 @@
 import SessionCard from './SessionCard'
+import {Link} from "react-router-dom";
 
 export default function SessionsRow({ movie, sessions }) {
     return (
         <section className="border-b border-white/10 py-6 first:pt-0">
-            <div className="mb-4 flex items-center gap-3">
+            <Link
+                to={`/movies/${movie.slug}`}
+                className="mb-4 flex items-center gap-3 hover:cursor-pointer max-w-[400px]">
                 <img
                     src={movie.posterUrl}
                     alt={movie.title}
@@ -18,7 +21,7 @@ export default function SessionsRow({ movie, sessions }) {
                     </div>
                     <p className="mt-1 text-[11px] text-white/60">{movie.runtimeMinutes} min</p>
                 </div>
-            </div>
+            </Link>
             <div className="flex gap-3 overflow-x-auto pb-2">
                 {sessions.map((s) => (
                     <SessionCard key={s.id} session={s} />

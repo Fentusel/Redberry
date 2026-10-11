@@ -28,3 +28,29 @@ export const fetchComingSoon = createAsyncThunk ("comingSoon/fetchComingSoon",
             return rejectWithValue(error.response?.data || " Failed to fetch coming soon movies ");
         }
     })
+export const fetchMovieDetails = createAsyncThunk(
+    "movieDetails/fetchMovieDetails",
+    async (slug, { rejectWithValue, signal }) => {
+        try {
+            const response = await axios.get(`https://api.kinoxii.redberryinternship.ge/api/movies/${slug}`, { signal });
+            return response.data.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || "Failed to fetch movie");
+        }
+    }
+);
+
+export const fetchMovieSessions = createAsyncThunk(
+    "movieDetails/fetchMovieSessions",
+    async ({ slug, date }, { rejectWithValue, signal }) => {
+        try {
+            const response = await axios.get(`https://api.kinoxii.redberryinternship.ge/api/movies/${slug}/sessions`, {
+                params: { date },
+                signal,
+            });
+            return response.data.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || "Failed to fetch sessions");
+        }
+    }
+);
