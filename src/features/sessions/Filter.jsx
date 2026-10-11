@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { KEYS } from './hooks'
 
 const DAYS_TO_SHOW = 7
@@ -9,6 +9,11 @@ function formatDateISO(date) {
     const m = String(date.getMonth() + 1).padStart(2, '0')
     const d = String(date.getDate()).padStart(2, '0')
     return `${y}-${m}-${d}`
+}
+
+function parseISO(iso) {
+    const [y, m, d] = iso.split('-').map(Number)
+    return new Date(y, m - 1, d)
 }
 
 function parseLabelAndHint(text) {
@@ -52,16 +57,25 @@ function CheckboxRow({ checked, onChange, label, hint }) {
     )
 }
 
-export default function Filter({ options, filters }) {
+export default function Filter({ options, filters, meta }) {
     const { params, toggle, setDate, activeCount, clearAll } = filters
+
+    // Remember the first date the server returned so the 7 buttons stay stable
+    const [baseDate, setBaseDate] = useState(null)
+
+    useEffect(() => {
+        if (!baseDate && meta?.date) {
+            setBaseDate(meta.date)
+        }
+    }, [meta?.date, baseDate])
 
     const days = useMemo(() => {
         const list = []
-        const today = new Date()
+        const start = baseDate ? parseISO(baseDate) : new Date()
 
         for (let i = 0; i < DAYS_TO_SHOW; i++) {
-            const d = new Date(today)
-            d.setDate(today.getDate() + i)
+            const d = new Date(start)
+            d.setDate(start.getDate() + i)
             list.push({
                 value: formatDateISO(d),
                 weekday: SHORT_DAYS[d.getDay()],
@@ -69,9 +83,9 @@ export default function Filter({ options, filters }) {
             })
         }
         return list
-    }, [])
+    }, [baseDate])
 
-    const selectedDate = params.get('date') ?? days[0]?.value
+    const selectedDate = params.get('date') ?? meta?.date ?? days[0]?.value
     const selectedVenueSlugs = params.getAll(KEYS.venues)
 
     const isChecked = (key, val) => params.getAll(key).includes(val)

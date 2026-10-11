@@ -84,10 +84,8 @@ export const MovieCarousel = () => {
                 <div className="max-w-[580px] h-[310px] flex flex-col">
 
                     {/* premiere */}
-                    <div className="mb-4 inline-flex rounded-full bg-[#EC3013]/10 text-[#EC3013] w-[200px] px-3 py-1 text-[10px] font-bold uppercase tracking-wide">
-                        {movie.isComingSoon
-                            ? 'Coming Soon'
-                            : 'PREMIERE · WEEK OF 15 SEPT'}
+                    <div className="mb-4 inline-flex rounded-full bg-[#EC3013]/10 text-[#EC3013] w-[200px] px-3 py-1 text-[12px] justify-center font-bold uppercase tracking-wide">
+                        Premiere · {movie.releaseDate}
                     </div>
 
                     {/* title */}

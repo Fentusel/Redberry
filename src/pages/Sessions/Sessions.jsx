@@ -25,7 +25,7 @@ export const Sessions = () => {
                 <h1 className="text-xl font-bold">Sessions</h1>
                 <p className="mb-6 text-xs text-white/60">Browse showtimes across all venues</p>
                 <div className="flex gap-10">
-                    <Filter options={options} filters={filters} />
+                    <Filter options={options} filters={filters} meta={meta} />
                     <div className="min-w-0 flex-1">
                         <div className="mb-5 flex items-center justify-between text-xs">
                             <span className="text-white/70">
