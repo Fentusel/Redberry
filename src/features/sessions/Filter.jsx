@@ -60,7 +60,6 @@ function CheckboxRow({ checked, onChange, label, hint }) {
 export default function Filter({ options, filters, meta }) {
     const { params, toggle, setDate, activeCount, clearAll } = filters
 
-    // Remember the first date the server returned so the 7 buttons stay stable
     const [baseDate, setBaseDate] = useState(null)
 
     useEffect(() => {
@@ -130,8 +129,7 @@ export default function Filter({ options, filters, meta }) {
                                     isActive
                                         ? 'bg-[#f5320f] text-white'
                                         : 'bg-[#272a42] text-white/70 hover:bg-[#31355a]'
-                                }`}
-                            >
+                                }`}>
                                 <span className="font-semibold">{item.weekday}</span>
                                 <span>{item.day}</span>
                             </button>

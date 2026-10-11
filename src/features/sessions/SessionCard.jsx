@@ -1,3 +1,7 @@
+import { useState } from "react";
+import BookingModal from "../booking/BookingModal";
+import useRequireAuth from "../auth/useRequireAuth";
+
 const TicketIcon = () => (
     <svg
         viewBox="0 0 12 12"
@@ -12,43 +16,60 @@ const TicketIcon = () => (
     </svg>
 );
 
-export default function SessionCard({ session }) {
+export default function SessionCard({ session, movie }) {
     const { time, format, language, hall, venue, price, seatsLeft, isSoldOut } = session;
     const isLowSeats = seatsLeft <= 5;
+    const [open, setOpen] = useState(false);
+    const requireAuth = useRequireAuth();
+
+    const handleClick = () => {
+        requireAuth(() => setOpen(true));
+    };
 
     return (
-        <button
-            type="button"
-            disabled={isSoldOut}
-            className={`w-[250px] shrink-0 rounded-xl bg-[#1E2031] p-3 text-left transition ${
-                isSoldOut ? "cursor-not-allowed opacity-40" : "hover:bg-[#2A2C3D]"
-            }`}
-        >
-            <div className="flex items-center justify-between gap-2">
-                <span className="text-sm font-bold">{time}</span>
-                <span className="rounded-full bg-[#272a42] px-2 py-0.5 text-[9px] font-semibold uppercase">
-          {format.name}
-        </span>
-            </div>
-            <div className="mt-3 flex items-center justify-between gap-2 text-[9px] text-white/60">
-                <span className="truncate">{language.name}</span>
-                {isSoldOut ? (
-                    <span className="shrink-0">Sold out</span>
-                ) : (
-                    <span className={`flex shrink-0 items-center gap-1 ${isLowSeats ? "text-red-500" : "text-green-400"}`}>
-                        <TicketIcon />
-                        {seatsLeft} left
-          </span>
-                )}
-            </div>
-            <div className="mt-1 flex items-center justify-between gap-2 text-[9px] text-white/60">
-        <span className="truncate">
-          {venue.name} · Hall {hall.name}
-        </span>
-                <span className="shrink-0 text-xs font-semibold text-white">
-          ₾{price}
-        </span>
-            </div>
-        </button>
+        <>
+            <button
+                type="button"
+                onClick={handleClick}
+                disabled={isSoldOut}
+                className={`w-[250px] shrink-0 rounded-xl bg-[#1E2031] p-3 text-left transition ${
+                    isSoldOut ? "cursor-not-allowed opacity-40" : "hover:bg-[#2A2C3D]"
+                }`}
+            >
+                <div className="flex items-center justify-between gap-2">
+                    <span className="text-sm font-bold">{time}</span>
+                    <span className="rounded-full bg-[#272a42] px-2 py-0.5 text-[9px] font-semibold uppercase">
+                        {format.name}
+                    </span>
+                </div>
+                <div className="mt-3 flex items-center justify-between gap-2 text-[9px] text-white/60">
+                    <span className="truncate">{language.name}</span>
+                    {isSoldOut ? (
+                        <span className="shrink-0">Sold out</span>
+                    ) : (
+                        <span className={`flex shrink-0 items-center gap-1 ${isLowSeats ? "text-red-500" : "text-green-400"}`}>
+                            <TicketIcon />
+                            {seatsLeft} left
+                        </span>
+                    )}
+                </div>
+                <div className="mt-1 flex items-center justify-between gap-2 text-[9px] text-white/60">
+                    <span className="truncate">
+                        {venue.name} · Hall {hall.name}
+                    </span>
+                    <span className="shrink-0 text-xs font-semibold text-white">
+                        ₾{price}
+                    </span>
+                </div>
+            </button>
+
+            {open && (
+                <BookingModal
+                    session={session}
+                    movie={movie ?? session.movie}
+                    onClose={() => setOpen(false)}
+                />
+            )}
+        </>
     );
 }

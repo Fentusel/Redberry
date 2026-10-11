@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovieDetails, fetchMovieSessions } from "../../api/moviesApi.js";
 import { setSelectedDate, clearMovieDetails } from "../slices/movieDetailsSlice.js";
+import BookingModal from "../../features/booking/BookingModal";
+import useRequireAuth from "../../features/auth/useRequireAuth";
 
 function getDayParts(iso) {
     const date = new Date(`${iso}T00:00:00`);
@@ -43,12 +45,13 @@ function DetailItem({ label, children }) {
     );
 }
 
-function SessionTicket({ session }) {
+function SessionTicket({ session, onSelect }) {
     const { isSoldOut, time, language, format, price, seatsLeft } = session;
 
     return (
         <button
             type="button"
+            onClick={() => onSelect(session)}
             disabled={isSoldOut}
             title={language.name}
             className={`flex overflow-hidden rounded-xl bg-[#0b0f1f] text-left transition ${
@@ -84,7 +87,7 @@ function SessionTicket({ session }) {
     );
 }
 
-function SessionsList({ groups, status, error }) {
+function SessionsList({ groups, status, error, selectedDate, onSelect }) {
     if (status === "idle" || status === "loading") {
         return <p className="mt-8 text-sm text-white/60">Loading sessions...</p>;
     }
@@ -106,7 +109,18 @@ function SessionsList({ groups, status, error }) {
                                 <p className="mb-3 text-xs font-semibold">Hall {hall.name}</p>
                                 <div className="flex flex-wrap gap-3">
                                     {sessions.map((session) => (
-                                        <SessionTicket key={session.id} session={session} />
+                                        <SessionTicket
+                                            key={session.id}
+                                            session={session}
+                                            onSelect={(s) =>
+                                                onSelect({
+                                                    ...s,
+                                                    venue: s.venue ?? venue,
+                                                    hall: s.hall ?? hall,
+                                                    date: s.date ?? selectedDate,
+                                                })
+                                            }
+                                        />
                                     ))}
                                 </div>
                             </div>
@@ -119,7 +133,6 @@ function SessionsList({ groups, status, error }) {
 }
 
 function DatePicker({ dates, selectedDate, onSelect }) {
-
     return (
         <div className="flex gap-3 overflow-x-auto pb-2">
             {dates.map((date) => {
@@ -241,6 +254,11 @@ export default function MovieDetails() {
         sessionsError,
     } = useSelector((state) => state.movieDetails);
 
+    const [booking, setBooking] = useState(null);
+    const requireAuth = useRequireAuth();
+
+    const openBooking = (session) => requireAuth(() => setBooking(session));
+
     useEffect(() => {
         const request = dispatch(fetchMovieDetails(slug));
         return () => {
@@ -281,10 +299,19 @@ export default function MovieDetails() {
                         groups={groups}
                         status={sessionsStatus}
                         error={sessionsError}
+                        selectedDate={selectedDate}
+                        onSelect={openBooking}
                     />
                 </section>
                 <MovieInfo movie={movie} />
             </div>
+            {booking && (
+                <BookingModal
+                    session={booking}
+                    movie={movie}
+                    onClose={() => setBooking(null)}
+                />
+            )}
         </div>
     );
 }

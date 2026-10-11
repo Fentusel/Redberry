@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { searchMovies } from "../../api/moviesApi.js";
+import { openLogin, openSignup } from "../../store/slices/authSlice.js";
+import UserMenu from "./UserPage.jsx";
 
 function useDebounce(value, delay = 300) {
     const [debounced, setDebounced] = useState(value);
@@ -120,8 +123,11 @@ function SearchBox() {
 }
 
 export default function Header() {
+    const dispatch = useDispatch();
+    const token = useSelector((s) => s.auth.token);
+
     return (
-        <header className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-20 py-8 text-white bg-gradient-to-b from-black/50 ">
+        <header className="absolute inset-x-0 top-0 z-30 flex items-center justify-between bg-gradient-to-b from-black/50 px-20 py-8 text-white">
             <div className="flex items-center gap-8">
                 <Link to="/" className="text-xl font-extrabold tracking-wide">
                     KINO <span className="text-[#EC3013]">XII</span>
@@ -136,18 +142,27 @@ export default function Header() {
 
             <div className="flex items-center gap-4">
                 <SearchBox />
-                <button
-                    type="button"
-                    className="rounded-full bg-[#EC3013] px-5 py-2 text-xs font-bold text-white transition hover:bg-[#d42a10]"
-                >
-                    Sign up
-                </button>
-                <button
-                    type="button"
-                    className="rounded-full bg-white px-5 py-2 text-xs font-bold text-black transition hover:bg-white/90"
-                >
-                    Log in
-                </button>
+
+                {token ? (
+                    <UserMenu />
+                ) : (
+                    <>
+                        <button
+                            type="button"
+                            onClick={() => dispatch(openSignup())}
+                            className="rounded-full bg-[#EC3013] px-5 py-2 text-xs font-bold text-white transition hover:bg-[#d42a10]"
+                        >
+                            Sign up
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => dispatch(openLogin())}
+                            className="rounded-full bg-white px-5 py-2 text-xs font-bold text-black transition hover:bg-white/90"
+                        >
+                            Log in
+                        </button>
+                    </>
+                )}
             </div>
         </header>
     );

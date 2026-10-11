@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNowPlaying } from "../../api/moviesApi.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function NowPlaying() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { items, loading, error } = useSelector((state) => state.nowPlayingCards);
 
     useEffect(() => {
@@ -59,7 +60,11 @@ export default function NowPlaying() {
                             <p className="text-[10px] text-gray-300">
                                 From <span className="font-bold">₾ {movie.fromPrice}</span>
                             </p>
-                            <button className="h-[35px] w-[110px] rounded-full bg-[#f5320f] px-3 py-1.5 text-[10px] font-bold text-white transition hover:bg-[#d92a0a]">
+                            <button
+                                type="button"
+                                onClick={() => navigate(`/movies/${movie.slug}`)}
+                                className="h-[35px] w-[110px] rounded-full bg-[#f5320f] px-3 py-1.5 text-[10px] font-bold text-white transition hover:bg-[#d92a0a]"
+                            >
                                 Buy Ticket
                             </button>
                         </div>
