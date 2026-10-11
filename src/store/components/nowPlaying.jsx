@@ -12,7 +12,7 @@ export default function NowPlaying() {
     }, [dispatch]);
 
     return (
-        <section className="min-h-[525px] w-full pt-[32px] px-32">
+        <section className="min-h-[525px] w-full pt-[32px] px-10">
             <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-lg font-bold uppercase">Now Playing</h2>
                 <Link to="/sessions" className="text-xs text-[#f5320f] hover:underline">
@@ -25,7 +25,7 @@ export default function NowPlaying() {
                     {typeof error === "string" ? error : "Something went wrong"}
                 </p>
             )}
-            <div className="relative w-full flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ">
+            <div className="relative w-full flex gap-5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ">
                 {items.map((movie) => (
                     <div
                         key={movie.id}

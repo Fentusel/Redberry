@@ -38,7 +38,7 @@ function DetailItem({ label, children }) {
             <p className="text-[10px] font-semibold uppercase tracking-wide text-white/50">
                 {label}
             </p>
-            <p className="mt-1 text-xs font-semibold text-white">{children}</p>
+            <p className=" text-xs font-semibold text-white">{children}</p>
         </div>
     );
 }
@@ -147,7 +147,7 @@ function DatePicker({ dates, selectedDate, onSelect }) {
 
 function Hero({ movie }) {
     return (
-        <section className="relative h-[400px] overflow-hidden">
+        <section className="relative h-[450px] overflow-hidden">
             <img
                 src={movie.backdropUrl}
                 alt=""
@@ -156,7 +156,7 @@ function Hero({ movie }) {
             <div className="absolute inset-0 bg-gradient-to-t from-[#050b1a] via-[#050b1a]/40 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#050b1a]/70 to-transparent" />
 
-            <div className="relative flex flex-col items-start gap-8 px-20 py-10 md:flex-row md:items-end md:py-12">
+            <div className="relative flex flex-col gap-8 px-20 py-[8rem] md:flex-row md:items-end ">
                 <img
                     src={movie.posterUrl}
                     alt={movie.title}

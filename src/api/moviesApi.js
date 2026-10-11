@@ -54,3 +54,10 @@ export const fetchMovieSessions = createAsyncThunk(
         }
     }
 );
+export const searchMovies = async (q, signal) => {
+    const response = await axios.get(
+        "https://api.kinoxii.redberryinternship.ge/api/search",
+        { params: { q }, signal }
+    );
+    return response.data.data;
+};

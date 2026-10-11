@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchComingSoon } from "../../api/moviesApi.js";
+import {Link} from "react-router-dom";
 
 export default function ComingSoon() {
     const dispatch = useDispatch();
@@ -11,12 +12,12 @@ export default function ComingSoon() {
     }, [dispatch]);
 
     return (
-        <section className="h-[200px] w-full px-32">
+        <section className="h-[200px] w-full px-10">
             <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-lg font-extrabold uppercase">Coming Soon...</h2>
-                <a href="/movies" className="text-xs text-[#f5320f] hover:underline">
+                <Link to="/sessions" className="text-xs text-[#f5320f] hover:underline">
                     See all
-                </a>
+                </Link>
             </div>
             {loading && <p className="text-sm text-gray-400">Loading...</p>}
             {error && (
@@ -25,7 +26,7 @@ export default function ComingSoon() {
                 </p>
             )}
             <div className="relative ">
-                <div className="flex gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                <div className="flex gap-5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     {items.map((movie) => (
                         <div
                             key={movie.id}

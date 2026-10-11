@@ -86,7 +86,7 @@ export const MovieCarousel = () => {
             <div className="absolute inset-0 bg-black/50" />
             <div className="absolute inset-0 bg-black/20" />
 
-            <div className="relative z-10 flex flex-1 items-center px-32">
+            <div className="relative z-10 flex flex-1 items-center px-10">
                 <div className="max-w-[580px] h-[310px] flex flex-col">
 
                     {/* premiere */}
@@ -145,7 +145,7 @@ export const MovieCarousel = () => {
             </div>
 
             {/* Carousel indicators */}
-            <div className="relative z-20 flex h-[54px] w-full items-center gap-3 px-32 pb-8">
+            <div className="relative z-20 flex h-[54px] w-full items-center gap-3 px-10 pb-8">
                 {movies.map((item, index) => (
                     <div
                         key={item.id}

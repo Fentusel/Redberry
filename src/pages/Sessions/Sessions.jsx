@@ -2,6 +2,7 @@ import Footer from '../../components/layout/Footer.jsx'
 import NavBar from '../../components/layout/Nav.jsx'
 import Filter from '../../features/sessions/Filter.jsx'
 import SessionsRow from '../../features/sessions/SessionsRow.jsx'
+import Header from "../../components/layout/Header.jsx";
 import {
     DEFAULT_SORT,
     useFilterOptions,
@@ -21,7 +22,8 @@ export const Sessions = () => {
 
     return (
         <div className="flex min-h-screen w-full flex-col bg-[#070C1C] text-white">
-            <main className="flex-1 px-10 py-6">
+            <Header/>
+            <main className="flex-1 px-10 py-[8rem]">
                 <h1 className="text-xl font-bold">Sessions</h1>
                 <p className="mb-6 text-xs text-white/60">Browse showtimes across all venues</p>
                 <div className="flex gap-10">

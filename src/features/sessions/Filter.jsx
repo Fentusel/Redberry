@@ -103,7 +103,7 @@ export default function Filter({ options, filters, meta }) {
     }, [options?.venues, options?.formats, selectedVenueSlugs])
 
     return (
-        <aside className="sticky top-6 w-[350px] shrink-0 self-start rounded-2xl bg-[#1a1c2e] p-5 ">
+        <aside className="sticky top-10 w-[350px] shrink-0 self-start rounded-2xl bg-[#1a1c2e] p-5 ">
             <h2 className="mb-2 text-sm font-bold">Filters</h2>
             <SectionGroup title="Venue">
                 {options?.venues?.map((venue) => (
